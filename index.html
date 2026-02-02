@@ -18,7 +18,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Slightly stronger overlay for better readability with new bg */
+/* Slightly stronger overlay for better readability */
 .overlay {
     position: absolute;
     inset: 0;
@@ -30,26 +30,24 @@ body {
 /* Floating cute aliens & UFOs */
 .alien-float {
     position: absolute;
-    opacity: 0.14;          /* lowered a bit */
+    opacity: 0.14;
     pointer-events: none;
     z-index: -1;
-    will-change: transform;  /* smoother on mobile */
-    font-size: clamp(1.8rem, 5vw, 3.2rem);  /* better scaling */
-    animation: drift infinite ease-in-out;   /* added ease */
+    will-change: transform;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    animation: drift infinite ease-in-out;
 }
 
-/* More varied speeds + starting positions + sizes via classes */
 .float-slow   { animation-duration: 140s; animation-delay: -20s; }
 .float-medium { animation-duration: 95s;  animation-delay: -40s; }
 .float-fast   { animation-duration: 70s;  animation-delay: -10s; }
 .float-reverse{ animation-direction: reverse; }
 
-/* Slightly different paths for each */
 #float1 { top: 10%;  left: 8%;  }
 #float2 { top: 22%;  right: 12%; }
 #float3 { bottom: 15%; left: 18%; }
 #float4 { bottom: 28%; right: 20%; }
-#float5 { top: 45%;  left: 25%;  }  /* extra ones */
+#float5 { top: 45%;  left: 25%;  }
 #float6 { top: 60%;  right: 15%; }
 
 @keyframes drift {
@@ -74,7 +72,6 @@ body {
     z-index: 1;
 }
 
-/* Title now normal white color with very soft glow only */
 .shiny-title {
     font-size: 2.7em;
     font-weight: bold;
@@ -156,6 +153,7 @@ button:hover {
     border-radius: 5px;
 }
 
+/* ─── COPY BUTTON ──────────────────────────────────────────────── */
 #copy-btn {
     position: absolute;
     top: -40px;
@@ -177,6 +175,7 @@ button:hover {
     background: #a080ff;
     color: #000;
     box-shadow: 0 0 20px #a080ff;
+    transform: scale(1.08);
 }
 
 .output-label {
@@ -205,12 +204,12 @@ button:hover {
 <div class="overlay"></div>
 
 <!-- Floating space friends -->
-<div class="alien-float float-slow" id="float1">👽</div>
-<div class="alien-float float-medium float-reverse" id="float2">🛸</div>
-<div class="alien-float float-fast" id="float3">👽</div>
-<div class="alien-float float-slow" id="float4">🧑‍🚀🛸</div>
-<div class="alien-float float-medium" id="float5">🪐</div>
-<div class="alien-float float-fast float-reverse" id="float6">🛸✨</div>
+<div class="alien-float float-slow"    id="float1">👽🛸</div>
+<div class="alien-float float-medium float-reverse" id="float2">🛸👾🌌</div>
+<div class="alien-float float-fast"    id="float3">👽🪐</div>
+<div class="alien-float float-slow"    id="float4">🧑‍🚀👽🛸</div>
+<div class="alien-float float-medium"  id="float5">🌠👾</div>
+<div class="alien-float float-fast float-reverse" id="float6">🛸✨👽</div>
 
 <div class="container">
 <h1 class="shiny-title">
@@ -243,7 +242,7 @@ Message Encrypter / Decrypter<br>👽🛸 by DreamXHava 🛸👽
 <label class="output-label">Incoming Alien Transmission 📡 (Decode before they arrive 👾)</label>
 
 <div class="github-link">
-Visit My Github Page  → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
+Visit My Github Page → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
 </div>
 </div>
 
@@ -271,7 +270,12 @@ function processMessage(encrypt) {
 }
 
 function copyResult() {
-    navigator.clipboard.writeText(currentResultText);
+    navigator.clipboard.writeText(currentResultText).then(() => {
+        // Optional: little feedback animation
+        const btn = document.getElementById("copy-btn");
+        btn.textContent = "Copied! 📡";
+        setTimeout(() => { btn.textContent = "Copy 📡"; }, 1500);
+    });
 }
 
 function clearAll() {
