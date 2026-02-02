@@ -3,227 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Message Encrypter / Decrypter ✨ by DreamXHava</title>
+<title>Alien Message Encrypter / Decrypter 👽🛸 by DreamXHava</title>
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #0d0d0d;
+    background: url('https://wallpaperaccess.com/full/843532.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #e0e0e0;
     text-align: center;
-    padding: 20px;
+    padding: 30px 15px;
     margin: 0;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
+
+/* Slightly stronger overlay for better readability with new bg */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10, 5, 50, 0.78), rgba(5, 15, 70, 0.72));
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Floating cute aliens & UFOs */
+.alien-float {
+    position: absolute;
+    opacity: 0.14;          /* lowered a bit */
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform;  /* smoother on mobile */
+    font-size: clamp(1.8rem, 5vw, 3.2rem);  /* better scaling */
+    animation: drift infinite ease-in-out;   /* added ease */
+}
+
+/* More varied speeds + starting positions + sizes via classes */
+.float-slow   { animation-duration: 140s; animation-delay: -20s; }
+.float-medium { animation-duration: 95s;  animation-delay: -40s; }
+.float-fast   { animation-duration: 70s;  animation-delay: -10s; }
+.float-reverse{ animation-direction: reverse; }
+
+/* Slightly different paths for each */
+#float1 { top: 10%;  left: 8%;  }
+#float2 { top: 22%;  right: 12%; }
+#float3 { bottom: 15%; left: 18%; }
+#float4 { bottom: 28%; right: 20%; }
+#float5 { top: 45%;  left: 25%;  }  /* extra ones */
+#float6 { top: 60%;  right: 15%; }
+
+@keyframes drift {
+    0%   { transform: translate(0, 0)   rotate(0deg);   }
+    20%  { transform: translate(60px, -50px)  rotate(8deg);  }
+    40%  { transform: translate(-70px, 80px)  rotate(-6deg); }
+    60%  { transform: translate(40px, -90px)  rotate(5deg);  }
+    80%  { transform: translate(-50px, 60px)  rotate(-9deg); }
+    100% { transform: translate(0, 0)   rotate(0deg);   }
+}
+
 .container {
-    max-width: 650px;
-    margin: auto;
-    background: #1a1a1a;
-    padding: 35px;
-    border-radius: 16px;
-    border: 1px solid #333;
-    box-shadow: 0 0 30px rgba(0,255,255,0.08);
+    max-width: 720px;
+    margin: 30px auto;
+    background: rgba(15, 15, 55, 0.78);
+    backdrop-filter: blur(6px);
+    padding: 45px 35px;
+    border-radius: 24px;
+    border: 2px solid rgba(160, 140, 255, 0.4);
+    box-shadow: 0 0 50px rgba(140, 100, 255, 0.25), inset 0 0 30px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 1;
 }
 
-/* ===== TITLE SHINE ===== */
+/* Title now normal white color with very soft glow only */
 .shiny-title {
-    font-size: 2.5em;
+    font-size: 2.7em;
     font-weight: bold;
-    background: linear-gradient(90deg,#00ffff,#8a2be2,#ff00ff,#00ffff);
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 12s linear infinite;
-    margin-bottom: 35px;
-}
-
-@keyframes shine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    color: #ffffff;
+    margin-bottom: 45px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
 
 label {
     display: block;
-    margin: 18px 0 8px;
-    color: #00ffff;
+    margin: 22px 0 12px;
+    color: #b0d0ff;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 textarea, select {
     width: 100%;
-    padding: 14px;
-    margin-bottom: 22px;
-    background: #222;
-    border: 2px solid #444;
-    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 26px;
+    background: rgba(10, 10, 45, 0.82);
+    border: 2px solid rgba(160, 140, 255, 0.45);
+    border-radius: 18px;
     color: #e0e0e0;
-    font-size: 1em;
-}
-
-textarea {
-    min-height: 110px;
-    resize: vertical;
+    font-size: 1.05em;
+    transition: all 0.3s;
 }
 
 textarea:focus, select:focus {
-    outline: none;
-    border-color: #00ffff;
-    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+    border-color: #c0b0ff;
+    box-shadow: 0 0 18px rgba(192, 176, 255, 0.35);
 }
 
 button {
-    background: #1e1e1e;
-    color: #00ffff;
-    border: 2px solid #00ffff;
-    padding: 14px 32px;
-    margin: 1px;
+    background: rgba(25, 25, 85, 0.85);
+    color: #b0d0ff;
+    border: 2px solid #a080ff;
+    padding: 15px 40px;
+    margin: 8px;
     border-radius: 50px;
-    font-size: 1.1em;
+    font-size: 1.15em;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.35s;
+    box-shadow: 0 0 12px rgba(160, 128, 255, 0.35);
 }
 
 button:hover {
-    background: linear-gradient(90deg,#00ffff,#8a2be2,#ff00ff);
-    color: #000;
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0,255,255,0.6);
+    background: linear-gradient(135deg, #a080ff, #80b0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(160, 128, 255, 0.55);
 }
 
-/* +3px vertical space */
-.clear-btn {
-    margin-bottom: 3px;
-}
+.clear-btn { margin-bottom: 12px; }
 
-/* ===== RESULT AREA ===== */
-.result-wrapper {
-    margin-top: 40px;
-    position: relative;
-}
+.result-wrapper { margin: 55px 0 25px; position: relative; }
 
 #result-container {
-    padding: 22px;
-    background: #111;
-    border: 2px solid #333;
-    border-radius: 14px;
-    height: 120px;
-    min-height: 120px;
-    max-height: 600px;
-    font-size: 1.15em;
+    padding: 26px;
+    background: rgba(5, 5, 35, 0.88);
+    border: 2px solid rgba(160, 140, 255, 0.4);
+    border-radius: 18px;
+    height: 150px;
+    min-height: 150px;
+    max-height: 700px;
+    font-size: 1.18em;
     word-wrap: break-word;
     text-align: left;
     overflow: auto;
     resize: vertical;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 
-#result-container::-webkit-scrollbar {
-    width: 8px;
-}
+#result-container::-webkit-scrollbar { width: 9px; }
+#result-container::-webkit-scrollbar-track { background: rgba(10,10,45,0.7); }
 #result-container::-webkit-scrollbar-thumb {
-    background: #00ffff;
-    border-radius: 4px;
+    background: linear-gradient(#c0b0ff, #a080ff);
+    border-radius: 5px;
 }
 
-/* ===== COPY BUTTON ===== */
 #copy-btn {
     position: absolute;
-    top: -30px;
-    right: 0;
-    background: #0f0f0f;
-    border: 1px solid #333;
-    color: #bbb;
-    font-size: 0.85em;
-    padding: 6px 12px;
-    border-radius: 8px;
+    top: -40px;
+    right: 10px;
+    background: rgba(20, 20, 80, 0.9);
+    border: 1px solid #a080ff;
+    color: #d0d0ff;
+    font-size: 0.95em;
+    padding: 9px 16px;
+    border-radius: 14px;
     cursor: pointer;
     display: none;
+    transition: all 0.3s;
 }
 
-#copy-btn.visible {
-    display: inline-block;
-}
+#copy-btn.visible { display: inline-block; }
 
 #copy-btn:hover {
-    background: #1a1a1a;
-    color: #00ffff;
-    border-color: #00ffff;
+    background: #a080ff;
+    color: #000;
+    box-shadow: 0 0 20px #a080ff;
 }
 
-/* ===== OUTPUT LABEL ===== */
 .output-label {
-    margin-top: 10px;
+    margin-top: 15px;
     display: block;
     font-weight: bold;
-    color: #00ffff;
+    color: #b0d0ff;
+    font-size: 1.1em;
 }
 
-/* ===== GITHUB SHINE (NEW) ===== */
 .github-link {
-    margin-top: 40px;
-    font-size: 1.05em;
+    margin-top: 60px;
+    font-size: 1.15em;
     font-weight: bold;
-    background: linear-gradient(
-        90deg,
-        #39ff14,
-        #00ffff,
-        #1e90ff,
-        #39ff14
-    );
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: githubShine 10s linear infinite;
-    filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
-}
-
-@keyframes githubShine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    color: #d0d0ff;
 }
 
 .github-link a {
-    -webkit-text-fill-color: transparent;
+    color: #b0d0ff;
     text-decoration: none;
 }
-
 </style>
 </head>
-
 <body>
+
+<div class="overlay"></div>
+
+<!-- Floating space friends -->
+<div class="alien-float float-slow" id="float1">👽</div>
+<div class="alien-float float-medium float-reverse" id="float2">🛸</div>
+<div class="alien-float float-fast" id="float3">👽</div>
+<div class="alien-float float-slow" id="float4">🧑‍🚀🛸</div>
+<div class="alien-float float-medium" id="float5">🪐</div>
+<div class="alien-float float-fast float-reverse" id="float6">🛸✨</div>
+
 <div class="container">
 <h1 class="shiny-title">
-Message Encrypter / Decrypter<br>by DreamXHava ✨
+Message Encrypter / Decrypter<br>👽🛸 by DreamXHava 🛸👽
 </h1>
 
-<label>Enter your secret message here</label>
-<textarea id="message" placeholder="Drop your code here..."></textarea>
+<label>Transmit your secret alien message 👽 (They’re watching... Be Quick 🛸)</label>
+<textarea id="message" placeholder="Enter extraterrestrial secrets here... 🌌"></textarea>
 
-<label>Select encryption method for your message </label>
+<label>Select invasion encryption type 🛰️ (Choose wisely, human 👾)</label>
 <select id="method">
-    <option value="1">#1 Caesar Cipher</option>
-    <option value="2">#2 Vigenère Cipher</option>
-    <option value="3">#3 ROT13</option>
-    <option value="4">#4 XOR Cipher</option>
-    <option value="5">#5 Base64 + Reverse</option>
+    <option value="1">#1 Caesar Cipher (human rate )🪐</option>
+    <option value="2">#2 Vigenère Cipher  👽</option>
+    <option value="3">#3 ROT13 (Galactic standard) 🛸</option>
+    <option value="4">#4 XOR Cipher  🌠</option>
+    <option value="5">#5 Base64 + Reverse (Deep space scramble) 🚀</option>
 </select>
 
-<button onclick="processMessage(true)">Encrypt 🔒</button>
-<button onclick="processMessage(false)">Decrypt 🔓</button>
-<button class="clear-btn" onclick="clearAll()">Clear 🧹</button>
+<button onclick="processMessage(true)">Encrypt 🔒🧑‍🚀</button>
+<button onclick="processMessage(false)">Decrypt 🔓👽</button>
+<button class="clear-btn" onclick="clearAll()">Clear 🧹🛸</button>
 
 <div class="result-wrapper">
-    <button id="copy-btn" onclick="copyResult()">Copy</button>
+    <button id="copy-btn" onclick="copyResult()">Copy 📡</button>
     <div id="result-container">
         <div id="result"></div>
     </div>
 </div>
 
-<label class="output-label">Output Box</label>
+<label class="output-label">Incoming Alien Transmission 📡 (Decode before they arrive 👾)</label>
 
 <div class="github-link">
-Visit My GitHub Page →
-<a href="https://github.com/Savindudam" target="_blank"> DreamXHava</a> ✨
+Visit My Github Page  → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
 </div>
-
 </div>
 
 <script>
@@ -233,18 +254,19 @@ const XOR_KEY = 137;
 let currentResultText = "";
 
 function processMessage(encrypt) {
-    const msg = message.value;
+    const msg = document.getElementById("message").value;
     if (!msg.trim()) return alert("Type something first 😅");
     let output = "";
-    switch (method.value) {
+    const method = document.getElementById("method").value;
+    switch (method) {
         case "1": output = caesarCipher(msg, encrypt ? CAESAR_SHIFT : -CAESAR_SHIFT); break;
         case "2": output = vigenereCipher(msg, VIGENERE_KEY, encrypt); break;
         case "3": output = rot13(msg); break;
         case "4": output = xorCipher(msg, XOR_KEY, encrypt); break;
         case "5": output = base64Reverse(msg, encrypt); break;
     }
-    result.textContent = output;
-    copy-btn.classList.add("visible");
+    document.getElementById("result").textContent = output;
+    document.getElementById("copy-btn").classList.add("visible");
     currentResultText = output;
 }
 
@@ -253,9 +275,9 @@ function copyResult() {
 }
 
 function clearAll() {
-    message.value = "";
-    result.textContent = "";
-    copy-btn.classList.remove("visible");
+    document.getElementById("message").value = "";
+    document.getElementById("result").textContent = "";
+    document.getElementById("copy-btn").classList.remove("visible");
 }
 
 function caesarCipher(text, shift) {
@@ -264,6 +286,7 @@ function caesarCipher(text, shift) {
         return String.fromCharCode((c.charCodeAt(0) - base + shift + 26) % 26 + base);
     });
 }
+
 function vigenereCipher(text, key, encrypt) {
     let r="",j=0; key=key.toUpperCase();
     for (let c of text) {
@@ -274,11 +297,14 @@ function vigenereCipher(text, key, encrypt) {
     }
     return r;
 }
+
 function rot13(t){return caesarCipher(t,13);}
+
 function xorCipher(t,k,e){
     return e?btoa([...t].map(c=>String.fromCharCode(c.charCodeAt(0)^k)).join("")):
     [...atob(t)].map(c=>String.fromCharCode(c.charCodeAt(0)^k)).join("");
 }
+
 function base64Reverse(t,e){
     return e?btoa(unescape(encodeURIComponent(t))).split("").reverse().join("")
     :decodeURIComponent(escape(atob(t.split("").reverse().join(""))));
