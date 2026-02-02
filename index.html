@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawaii Message Encrypter/Decrypter ✨</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background: #ffe4e1; color: #333; text-align: center; padding: 20px; }
+        h1 { color: #ff69b4; font-size: 2em; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; color: #ff69b4; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #ff69b4; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+        button:hover { background: #ff1493; }
+        #result { margin-top: 20px; padding: 15px; background: #f0f8ff; border: 1px solid #add8e6; border-radius: 5px; word-wrap: break-word; }
+        .emoji { font-size: 1.5em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Message Encrypter/Decrypter by DreamXHava<span class="emoji">💖🔒</span></h1>
+        <label for="message">Enter your secret message, senpai~! 📝</label>
+        <textarea id="message" rows="4" placeholder="Type here... owo"></textarea>
+        
+        <label for="method">Choose encryption language (method) #~! (1-5) 🔢</label>
+        <select id="method">
+            <option value="1">#1: Caesar Cipher (needs shift number key)</option>
+            <option value="2">#2: Vigenère Cipher (needs keyword)</option>
+            <option value="3">#3: ROT13 (no key needed)</option>
+            <option value="4">#4: XOR Cipher (needs number key)</option>
+            <option value="5">#5: Base64 + Reverse (no key needed)</option>
+        </select>
+        
+        <label for="key">Key (if needed for your method)~! 🔑</label>
+        <input type="text" id="key" placeholder="e.g., 3 for Caesar, 'secret' for Vigenère, etc.">
+        
+        <button onclick="processMessage(true)">Encrypt! ✨🔒</button>
+        <button onclick="processMessage(false)">Decrypt! 🔓✨</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function processMessage(isEncrypt) {
+            const message = document.getElementById('message').value;
+            const method = document.getElementById('method').value;
+            const key = document.getElementById('key').value;
+            let result = '';
+
+            if (!message) {
+                alert('Owo, senpai! Please enter a message first~! 💕');
+                return;
+            }
+
+            switch (method) {
+                case '1': // #1: Caesar Cipher
+                    if (!key || isNaN(key)) {
+                        alert('Nya~! For Caesar, key must be a number like 3! 🐱');
+                        return;
+                    }
+                    const shift = parseInt(key) % 26;
+                    result = caesarCipher(message, isEncrypt ? shift : -shift);
+                    break;
+                case '2': // #2: Vigenère Cipher
+                    if (!key) {
+                        alert('Ehehe~! Vigenère needs a keyword like "secret"! 📜');
+                        return;
+                    }
+                    result = vigenereCipher(message, key, isEncrypt);
+                    break;
+                case '3': // #3: ROT13
+                    result = rot13(message); // Same for encrypt/decrypt
+                    break;
+                case '4': // #4: XOR Cipher
+                    if (!key || isNaN(key)) {
+                        alert('UwU~! XOR needs a number key like 42! 🔢');
+                        return;
+                    }
+                    const xorKey = parseInt(key);
+                    result = xorCipher(message, xorKey);
+                    break;
+                case '5': // #5: Base64 + Reverse
+                    result = base64Reverse(message, isEncrypt);
+                    break;
+                default:
+                    alert('Oopsie~! Pick a method #1-5, senpai! :3');
+                    return;
+            }
+
+            document.getElementById('result').innerHTML = `<strong>${isEncrypt ? 'Encrypted' : 'Decrypted'} Message:</strong> ${result} <span class="emoji">🐬</span>`;
+        }
+
+        // #1: Caesar Cipher function
+        function caesarCipher(text, shift) {
+            return text.replace(/[a-zA-Z]/g, (char) => {
+                const base = char >= 'A' && char <= 'Z' ? 65 : 97;
+                return String.fromCharCode((char.charCodeAt(0) - base + shift + 26) % 26 + base);
+            });
+        }
+
+        // #2: Vigenère Cipher function
+        function vigenereCipher(text, key, encrypt) {
+            let result = '';
+            let keyIndex = 0;
+            key = key.toUpperCase();
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (/[a-zA-Z]/.test(char)) {
+                    const base = char >= 'A' && char <= 'Z' ? 65 : 97;
+                    const keyChar = key[keyIndex % key.length].toUpperCase().charCodeAt(0) - 65;
+                    const shift = encrypt ? keyChar : -keyChar;
+                    result += String.fromCharCode((char.charCodeAt(0) - base + shift + 26) % 26 + base);
+                    keyIndex++;
+                } else {
+                    result += char; // Non-letters stay the same
+                }
+            }
+            return result;
+        }
+
+        // #3: ROT13 function (fixed Caesar shift 13)
+        function rot13(text) {
+            return caesarCipher(text, 13);
+        }
+
+        // #4: XOR Cipher function (works on char codes)
+        function xorCipher(text, key) {
+            return Array.from(text).map((char) => {
+                return String.fromCharCode(char.charCodeAt(0) ^ key);
+            }).join('');
+        }
+
+        // #5: Base64 + Reverse function
+        function base64Reverse(text, encrypt) {
+            if (encrypt) {
+                const base64 = btoa(text);
+                return base64.split('').reverse().join('');
+            } else {
+                const reversed = text.split('').reverse().join('');
+                return atob(reversed);
+            }
+        }
+    </script>
+</body>
+</html>
