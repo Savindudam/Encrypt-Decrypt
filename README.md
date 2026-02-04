@@ -37,9 +37,14 @@ No external libraries — pure HTML + CSS + Vanilla JavaScript
              
                 git clone https://github.com/Savindudam/Encrypt-Decrypt.git
                 cd Encrypt-Decrypt
-  Open the main fileOption 1: Double-click index.htmlOption 2: Use terminal (choose your OS)open index.html           # macOS
-  start index.html          # Windows
-  xdg-open index.html       # Linux
+  Open the main file
+  
+    Option 1: Double-click index.html
+    Option 2: Use terminal (choose your OS) 
+             
+             open index.html           # macOS
+             start index.html          # Windows
+             xdg-open index.html       # Linux
   Start sending encrypted messages across the galaxy 👽
 
 ---
