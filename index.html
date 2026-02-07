@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alien Message Encrypter / Decrypter 👽🛸 by DreamXHava</title>
+<title>Alien Message Vault & Encrypter 👽🛸 by DreamXHava</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -17,8 +17,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
-
-/* Slightly stronger overlay for better readability */
 .overlay {
     position: absolute;
     inset: 0;
@@ -26,8 +24,6 @@ body {
     z-index: -2;
     pointer-events: none;
 }
-
-/* Floating cute aliens & UFOs */
 .alien-float {
     position: absolute;
     opacity: 0.14;
@@ -37,19 +33,16 @@ body {
     font-size: clamp(1.8rem, 5vw, 3.2rem);
     animation: drift infinite ease-in-out;
 }
-
 .float-slow   { animation-duration: 140s; animation-delay: -20s; }
 .float-medium { animation-duration: 95s;  animation-delay: -40s; }
 .float-fast   { animation-duration: 70s;  animation-delay: -10s; }
 .float-reverse{ animation-direction: reverse; }
-
 #float1 { top: 10%;  left: 8%;  }
 #float2 { top: 22%;  right: 12%; }
 #float3 { bottom: 15%; left: 18%; }
 #float4 { bottom: 28%; right: 20%; }
 #float5 { top: 45%;  left: 25%;  }
 #float6 { top: 60%;  right: 15%; }
-
 @keyframes drift {
     0%   { transform: translate(0, 0)   rotate(0deg);   }
     20%  { transform: translate(60px, -50px)  rotate(8deg);  }
@@ -58,7 +51,6 @@ body {
     80%  { transform: translate(-50px, 60px)  rotate(-9deg); }
     100% { transform: translate(0, 0)   rotate(0deg);   }
 }
-
 .container {
     max-width: 720px;
     margin: 30px auto;
@@ -71,7 +63,6 @@ body {
     position: relative;
     z-index: 1;
 }
-
 .shiny-title {
     font-size: 2.7em;
     font-weight: bold;
@@ -79,7 +70,6 @@ body {
     margin-bottom: 45px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
-
 label {
     display: block;
     margin: 22px 0 12px;
@@ -87,7 +77,6 @@ label {
     font-weight: bold;
     font-size: 1.1em;
 }
-
 textarea, select {
     width: 100%;
     padding: 18px;
@@ -99,12 +88,10 @@ textarea, select {
     font-size: 1.05em;
     transition: all 0.3s;
 }
-
 textarea:focus, select:focus {
     border-color: #c0b0ff;
     box-shadow: 0 0 18px rgba(192, 176, 255, 0.35);
 }
-
 button {
     background: rgba(25, 25, 85, 0.85);
     color: #b0d0ff;
@@ -118,18 +105,14 @@ button {
     transition: all 0.35s;
     box-shadow: 0 0 12px rgba(160, 128, 255, 0.35);
 }
-
 button:hover {
     background: linear-gradient(135deg, #a080ff, #80b0ff);
     color: white;
     transform: translateY(-3px);
     box-shadow: 0 0 28px rgba(160, 128, 255, 0.55);
 }
-
 .clear-btn { margin-bottom: 12px; }
-
 .result-wrapper { margin: 55px 0 25px; position: relative; }
-
 #result-container {
     padding: 26px;
     background: rgba(5, 5, 35, 0.88);
@@ -145,15 +128,12 @@ button:hover {
     resize: vertical;
     box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
-
 #result-container::-webkit-scrollbar { width: 9px; }
 #result-container::-webkit-scrollbar-track { background: rgba(10,10,45,0.7); }
 #result-container::-webkit-scrollbar-thumb {
     background: linear-gradient(#c0b0ff, #a080ff);
     border-radius: 5px;
 }
-
-/* ─── COPY BUTTON ──────────────────────────────────────────────── */
 #copy-btn {
     position: absolute;
     top: -40px;
@@ -168,16 +148,13 @@ button:hover {
     display: none;
     transition: all 0.3s;
 }
-
 #copy-btn.visible { display: inline-block; }
-
 #copy-btn:hover {
     background: #a080ff;
     color: #000;
     box-shadow: 0 0 20px #a080ff;
     transform: scale(1.08);
 }
-
 .output-label {
     margin-top: 15px;
     display: block;
@@ -185,17 +162,21 @@ button:hover {
     color: #b0d0ff;
     font-size: 1.1em;
 }
-
 .github-link {
     margin-top: 60px;
     font-size: 1.15em;
     font-weight: bold;
     color: #d0d0ff;
 }
-
 .github-link a {
     color: #b0d0ff;
     text-decoration: none;
+}
+.note {
+    font-size: 0.95em;
+    color: #a0c0ff;
+    margin: 20px 0 30px;
+    line-height: 1.5;
 }
 </style>
 </head>
@@ -203,33 +184,38 @@ button:hover {
 
 <div class="overlay"></div>
 
-<!-- Floating space friends -->
-<div class="alien-float float-slow"    id="float1">👽🛸</div>
+<div class="alien-float float-slow" id="float1">👽🛸</div>
 <div class="alien-float float-medium float-reverse" id="float2">🛸👾🌌</div>
-<div class="alien-float float-fast"    id="float3">👽🪐</div>
-<div class="alien-float float-slow"    id="float4">🧑‍🚀👽🛸</div>
-<div class="alien-float float-medium"  id="float5">🌠👾</div>
+<div class="alien-float float-fast" id="float3">👽🪐</div>
+<div class="alien-float float-slow" id="float4">🧑‍🚀👽🛸</div>
+<div class="alien-float float-medium" id="float5">🌠👾</div>
 <div class="alien-float float-fast float-reverse" id="float6">🛸✨👽</div>
 
 <div class="container">
 <h1 class="shiny-title">
-Message Encrypter / Decrypter<br>👽🛸 by DreamXHava 🛸👽
+Alien Message Vault & Encrypter 👽🛸 by DreamXHava
 </h1>
 
-<label>Transmit your secret alien message 👽 (They’re watching... Be Quick 🛸)</label>
-<textarea id="message" placeholder="Enter extraterrestrial secrets here... 🌌"></textarea>
+<div class="note">
+Classic ciphers still work~ but now you can also save secrets to Discord and get them back with a code ♡  
+<small>(Backend must be running!)</small>
+</div>
 
-<label>Select invasion encryption type 🛰️ (Choose wisely, human 👾)</label>
+<label>Transmit your secret alien message 👽 (They’re watching... Be Quick 🛸)</label>
+<textarea id="message" placeholder="Enter message or code here... 🌌" rows="6"></textarea>
+
+<label>Select mode / cipher 🛰️ (Choose wisely, human 👾)</label>
 <select id="method">
-    <option value="1">#1 Caesar Cipher (human rate )🪐</option>
-    <option value="2">#2 Vigenère Cipher  👽</option>
-    <option value="3">#3 ROT13 (Galactic standard) 🛸</option>
-    <option value="4">#4 XOR Cipher  🌠</option>
-    <option value="5">#5 Base64 + Reverse (Deep space scramble) 🚀</option>
+    <option value="1">#1 Caesar Cipher 🪐</option>
+    <option value="2">#2 Vigenère Cipher 👽</option>
+    <option value="3">#3 ROT13 🛸</option>
+    <option value="4">#4 XOR Cipher 🌠</option>
+    <option value="5">#5 Base64 + Reverse 🚀</option>
+    <option value="save">Save to Discord Vault 📦 (new!)</option>
+    <option value="retrieve">Retrieve from Vault 🔍 (paste code)</option>
 </select>
 
-<button onclick="processMessage(true)">Encrypt 🔒🧑‍🚀</button>
-<button onclick="processMessage(false)">Decrypt 🔓👽</button>
+<button onclick="processMessage()">Execute ✨</button>
 <button class="clear-btn" onclick="clearAll()">Clear 🧹🛸</button>
 
 <div class="result-wrapper">
@@ -239,7 +225,7 @@ Message Encrypter / Decrypter<br>👽🛸 by DreamXHava 🛸👽
     </div>
 </div>
 
-<label class="output-label">Incoming Alien Transmission 📡 (Decode before they arrive 👾)</label>
+<label class="output-label">Incoming Alien Transmission / Vault Result 📡</label>
 
 <div class="github-link">
 Visit My Github Page → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
@@ -247,31 +233,87 @@ Visit My Github Page → <a href="https://github.com/Savindudam" target="_blank"
 </div>
 
 <script>
+const SERVER_URL = "https://backend-lime-nine-92.vercel.app"; // your backend URL
+
+let currentResultText = "";
+
 const CAESAR_SHIFT = 17;
 const VIGENERE_KEY = "DREAMXHAVA2026";
 const XOR_KEY = 137;
-let currentResultText = "";
 
-function processMessage(encrypt) {
-    const msg = document.getElementById("message").value;
-    if (!msg.trim()) return alert("Type something first 😅");
-    let output = "";
+async function processMessage() {
+    const input = document.getElementById("message").value.trim();
     const method = document.getElementById("method").value;
-    switch (method) {
-        case "1": output = caesarCipher(msg, encrypt ? CAESAR_SHIFT : -CAESAR_SHIFT); break;
-        case "2": output = vigenereCipher(msg, VIGENERE_KEY, encrypt); break;
-        case "3": output = rot13(msg); break;
-        case "4": output = xorCipher(msg, XOR_KEY, encrypt); break;
-        case "5": output = base64Reverse(msg, encrypt); break;
+    const resultDiv = document.getElementById("result");
+
+    if (!input) {
+        resultDiv.textContent = "Type something first senpai~ 😅";
+        return;
     }
-    document.getElementById("result").textContent = output;
-    document.getElementById("copy-btn").classList.add("visible");
-    currentResultText = output;
+
+    resultDiv.textContent = "Processing... 👽🛸";
+
+    try {
+        // Vault features
+        if (method === "save") {
+            const res = await fetch(`${SERVER_URL}/api/save`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: input })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                resultDiv.textContent = 
+                    `Save command sent successfully!\n\n` +
+                    `Check your Discord channel!\n` +
+                    `The bot will reply with your secret code ♡`;
+            } else {
+                resultDiv.textContent = `Error: ${data.error || "Backend failed :c"}`;
+            }
+        } 
+        else if (method === "retrieve") {
+            const res = await fetch(`${SERVER_URL}/api/retrieve`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code: input })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                resultDiv.textContent = 
+                    `Retrieve command sent!\n\n` +
+                    `Check your Discord channel!\n` +
+                    `The bot will reply with your saved message ♡`;
+            } else {
+                resultDiv.textContent = `Error: ${data.error || "Backend failed :("}`;
+            }
+        } 
+        // Classic client-side ciphers
+        else {
+            let output = "";
+            const encrypt = true; // default for classic modes (can add toggle later)
+
+            switch (method) {
+                case "1": output = caesarCipher(input, CAESAR_SHIFT); break;
+                case "2": output = vigenereCipher(input, VIGENERE_KEY, encrypt); break;
+                case "3": output = rot13(input); break;
+                case "4": output = xorCipher(input, XOR_KEY, encrypt); break;
+                case "5": output = base64Reverse(input, encrypt); break;
+            }
+            resultDiv.textContent = output;
+        }
+
+        document.getElementById("copy-btn").classList.add("visible");
+        currentResultText = resultDiv.textContent;
+    } catch (err) {
+        resultDiv.textContent = "Connection failed... is your backend live on Vercel? 🛸";
+        console.error(err);
+    }
 }
 
 function copyResult() {
     navigator.clipboard.writeText(currentResultText).then(() => {
-        // Optional: little feedback animation
         const btn = document.getElementById("copy-btn");
         btn.textContent = "Copied! 📡";
         setTimeout(() => { btn.textContent = "Copy 📡"; }, 1500);
