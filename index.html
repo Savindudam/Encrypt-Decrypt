@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alien Message Vault 👽🛸 by DreamXHava</title>
+<title>Alien Message Encrypter / Decrypter 👽🛸 by DreamXHava</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -18,6 +18,7 @@ body {
     overflow-x: hidden;
 }
 
+/* Slightly stronger overlay for better readability */
 .overlay {
     position: absolute;
     inset: 0;
@@ -26,6 +27,7 @@ body {
     pointer-events: none;
 }
 
+/* Floating cute aliens & UFOs */
 .alien-float {
     position: absolute;
     opacity: 0.14;
@@ -58,112 +60,109 @@ body {
 }
 
 .container {
-    max-width: 760px;
+    max-width: 720px;
     margin: 30px auto;
-    background: rgba(15, 15, 55, 0.82);
+    background: rgba(15, 15, 55, 0.78);
     backdrop-filter: blur(6px);
     padding: 45px 35px;
     border-radius: 24px;
-    border: 2px solid rgba(160, 140, 255, 0.45);
-    box-shadow: 0 0 50px rgba(140, 100, 255, 0.3), inset 0 0 30px rgba(0,0,0,0.45);
+    border: 2px solid rgba(160, 140, 255, 0.4);
+    box-shadow: 0 0 50px rgba(140, 100, 255, 0.25), inset 0 0 30px rgba(0,0,0,0.4);
     position: relative;
     z-index: 1;
 }
 
 .shiny-title {
-    font-size: 2.8em;
+    font-size: 2.7em;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 40px;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    margin-bottom: 45px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
 
 label {
     display: block;
-    margin: 24px 0 14px;
+    margin: 22px 0 12px;
     color: #b0d0ff;
     font-weight: bold;
-    font-size: 1.15em;
+    font-size: 1.1em;
 }
 
-textarea, input[type="text"] {
+textarea, select {
     width: 100%;
     padding: 18px;
-    margin-bottom: 24px;
-    background: rgba(10, 10, 45, 0.85);
-    border: 2px solid rgba(160, 140, 255, 0.5);
+    margin-bottom: 26px;
+    background: rgba(10, 10, 45, 0.82);
+    border: 2px solid rgba(160, 140, 255, 0.45);
     border-radius: 18px;
     color: #e0e0e0;
-    font-size: 1.08em;
+    font-size: 1.05em;
     transition: all 0.3s;
-    resize: vertical;
 }
 
-textarea:focus, input[type="text"]:focus {
+textarea:focus, select:focus {
     border-color: #c0b0ff;
-    box-shadow: 0 0 20px rgba(192, 176, 255, 0.4);
-    outline: none;
+    box-shadow: 0 0 18px rgba(192, 176, 255, 0.35);
 }
 
 button {
-    background: rgba(25, 25, 85, 0.88);
+    background: rgba(25, 25, 85, 0.85);
     color: #b0d0ff;
     border: 2px solid #a080ff;
-    padding: 14px 38px;
-    margin: 8px 4px;
+    padding: 15px 40px;
+    margin: 8px;
     border-radius: 50px;
-    font-size: 1.12em;
+    font-size: 1.15em;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.35s;
-    box-shadow: 0 0 14px rgba(160, 128, 255, 0.4);
+    box-shadow: 0 0 12px rgba(160, 128, 255, 0.35);
 }
 
 button:hover {
     background: linear-gradient(135deg, #a080ff, #80b0ff);
     color: white;
-    transform: translateY(-4px);
-    box-shadow: 0 0 30px rgba(160, 128, 255, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(160, 128, 255, 0.55);
 }
 
-.clear-btn { margin-bottom: 16px; }
+.clear-btn { margin-bottom: 12px; }
 
-.result-wrapper {
-    margin: 50px 0 30px;
-    position: relative;
-}
+.result-wrapper { margin: 55px 0 25px; position: relative; }
 
 #result-container {
-    padding: 28px;
-    background: rgba(5, 5, 35, 0.9);
-    border: 2px solid rgba(160, 140, 255, 0.45);
-    border-radius: 20px;
-    min-height: 160px;
-    max-height: 720px;
-    font-size: 1.2em;
+    padding: 26px;
+    background: rgba(5, 5, 35, 0.88);
+    border: 2px solid rgba(160, 140, 255, 0.4);
+    border-radius: 18px;
+    height: 150px;
+    min-height: 150px;
+    max-height: 700px;
+    font-size: 1.18em;
     word-wrap: break-word;
     text-align: left;
     overflow: auto;
     resize: vertical;
-    box-shadow: inset 0 0 22px rgba(0,0,0,0.55);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 
-#result-container::-webkit-scrollbar { width: 10px; }
-#result-container::-webkit-scrollbar-track { background: rgba(10,10,45,0.75); }
+#result-container::-webkit-scrollbar { width: 9px; }
+#result-container::-webkit-scrollbar-track { background: rgba(10,10,45,0.7); }
 #result-container::-webkit-scrollbar-thumb {
     background: linear-gradient(#c0b0ff, #a080ff);
     border-radius: 5px;
 }
 
+/* ─── COPY BUTTON ──────────────────────────────────────────────── */
 #copy-btn {
     position: absolute;
-    top: -42px;
-    right: 12px;
-    background: rgba(20, 20, 80, 0.92);
+    top: -40px;
+    right: 10px;
+    background: rgba(20, 20, 80, 0.9);
     border: 1px solid #a080ff;
     color: #d0d0ff;
-    font-size: 0.96em;
-    padding: 9px 18px;
+    font-size: 0.95em;
+    padding: 9px 16px;
     border-radius: 14px;
     cursor: pointer;
     display: none;
@@ -175,21 +174,21 @@ button:hover {
 #copy-btn:hover {
     background: #a080ff;
     color: #000;
-    box-shadow: 0 0 22px #a080ff;
-    transform: scale(1.1);
+    box-shadow: 0 0 20px #a080ff;
+    transform: scale(1.08);
 }
 
 .output-label {
-    margin-top: 18px;
+    margin-top: 15px;
     display: block;
     font-weight: bold;
     color: #b0d0ff;
-    font-size: 1.15em;
+    font-size: 1.1em;
 }
 
 .github-link {
-    margin-top: 70px;
-    font-size: 1.18em;
+    margin-top: 60px;
+    font-size: 1.15em;
     font-weight: bold;
     color: #d0d0ff;
 }
@@ -198,19 +197,13 @@ button:hover {
     color: #b0d0ff;
     text-decoration: none;
 }
-
-.note {
-    font-size: 0.95em;
-    color: #a0c0ff;
-    margin: 20px 0 40px;
-    line-height: 1.5;
-}
 </style>
 </head>
 <body>
 
 <div class="overlay"></div>
 
+<!-- Floating space friends -->
 <div class="alien-float float-slow"    id="float1">👽🛸</div>
 <div class="alien-float float-medium float-reverse" id="float2">🛸👾🌌</div>
 <div class="alien-float float-fast"    id="float3">👽🪐</div>
@@ -220,32 +213,24 @@ button:hover {
 
 <div class="container">
 <h1 class="shiny-title">
-Alien Message Vault 👽🛸 by DreamXHava
+Message Encrypter / Decrypter<br>👽🛸 by DreamXHava 🛸👽
 </h1>
 
-<div class="note">
-    Classic ciphers still work below~ but now you can also <strong>save secrets to Discord</strong> and retrieve them later with a code ♡<br>
-    <small>(Server must be running + bot online)</small>
-</div>
+<label>Transmit your secret alien message 👽 (They’re watching... Be Quick 🛸)</label>
+<textarea id="message" placeholder="Enter extraterrestrial secrets here... 🌌"></textarea>
 
-<label>Transmit your secret alien message 👽</label>
-<textarea id="message" placeholder="Enter your secret here... 🌌" rows="6"></textarea>
-
-<label>Select action / cipher type 🛰️</label>
+<label>Select invasion encryption type 🛰️ (Choose wisely, human 👾)</label>
 <select id="method">
-    <option value="caesar">Classic #1 - Caesar Cipher 🪐</option>
-    <option value="vigenere">Classic #2 - Vigenère Cipher 👽</option>
-    <option value="rot13">Classic #3 - ROT13 🛸</option>
-    <option value="xor">Classic #4 - XOR Cipher 🌠</option>
-    <option value="base64rev">Classic #5 - Base64 + Reverse 🚀</option>
-    <option value="save" selected>Save Secret to Vault 📦 (new!)</option>
-    <option value="retrieve">Retrieve Secret 🔍 (enter code)</option>
+    <option value="1">#1 Caesar Cipher (human rate )🪐</option>
+    <option value="2">#2 Vigenère Cipher  👽</option>
+    <option value="3">#3 ROT13 (Galactic standard) 🛸</option>
+    <option value="4">#4 XOR Cipher  🌠</option>
+    <option value="5">#5 Base64 + Reverse (Deep space scramble) 🚀</option>
 </select>
 
-<div style="margin: 30px 0;">
-    <button onclick="processAction()">Execute ✨</button>
-    <button class="clear-btn" onclick="clearAll()">Clear 🧹</button>
-</div>
+<button onclick="processMessage(true)">Encrypt 🔒🧑‍🚀</button>
+<button onclick="processMessage(false)">Decrypt 🔓👽</button>
+<button class="clear-btn" onclick="clearAll()">Clear 🧹🛸</button>
 
 <div class="result-wrapper">
     <button id="copy-btn" onclick="copyResult()">Copy 📡</button>
@@ -254,103 +239,42 @@ Alien Message Vault 👽🛸 by DreamXHava
     </div>
 </div>
 
-<label class="output-label">Incoming Transmission / Vault Result 📡</label>
+<label class="output-label">Incoming Alien Transmission 📡 (Decode before they arrive 👾)</label>
 
 <div class="github-link">
-    Visit My Github → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
+Visit My Github Page → <a href="https://github.com/Savindudam" target="_blank">DreamXHava</a> 🧑‍🚀✨
 </div>
 </div>
 
 <script>
-const SERVER_URL = "http://localhost:3000"; // change if you deploy it somewhere
+const CAESAR_SHIFT = 17;
+const VIGENERE_KEY = "DREAMXHAVA2026";
+const XOR_KEY = 137;
 let currentResultText = "";
 
-async function processAction() {
-    const input = document.getElementById("message").value.trim();
+function processMessage(encrypt) {
+    const msg = document.getElementById("message").value;
+    if (!msg.trim()) return alert("Type something first 😅");
+    let output = "";
     const method = document.getElementById("method").value;
-    const resultDiv = document.getElementById("result");
-
-    if (!input) {
-        resultDiv.textContent = "Please type something first senpai~ :c";
-        return;
+    switch (method) {
+        case "1": output = caesarCipher(msg, encrypt ? CAESAR_SHIFT : -CAESAR_SHIFT); break;
+        case "2": output = vigenereCipher(msg, VIGENERE_KEY, encrypt); break;
+        case "3": output = rot13(msg); break;
+        case "4": output = xorCipher(msg, XOR_KEY, encrypt); break;
+        case "5": output = base64Reverse(msg, encrypt); break;
     }
-
-    resultDiv.textContent = "Processing... 👽🛸";
-
-    try {
-        if (method === "save") {
-            const res = await fetch(`${SERVER_URL}/api/save`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: input })
-            });
-
-            const data = await res.json();
-
-            if (data.success && data.code) {
-                resultDiv.textContent = 
-                    `Message saved in the vault!\n\n` +
-                    `Your secret code: ${data.code}\n\n` +
-                    `Use "Retrieve Secret" with this code later~ ♡\n` +
-                    `Keep it safe nya!`;
-            } else {
-                resultDiv.textContent = `Error: ${data.error || "Bot didn't respond :("}`;
-            }
-        } 
-        else if (method === "retrieve") {
-            const res = await fetch(`${SERVER_URL}/api/retrieve`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ code: input })
-            });
-
-            const data = await res.json();
-
-            if (data.success && data.message) {
-                resultDiv.textContent = 
-                    `Secret retrieved successfully!\n\n` +
-                    `${data.message}\n\n` +
-                    `Enjoy your message senpai~ 💜`;
-            } else {
-                resultDiv.textContent = `Error: ${data.error || "No message found for this code :c"}`;
-            }
-        } 
-        else {
-            // Classic ciphers
-            let output = "";
-            switch (method) {
-                case "caesar":
-                    output = caesarCipher(input, 17);
-                    break;
-                case "vigenere":
-                    output = vigenereCipher(input, "DREAMXHAVA2026", true);
-                    break;
-                case "rot13":
-                    output = rot13(input);
-                    break;
-                case "xor":
-                    output = xorCipher(input, 137, true);
-                    break;
-                case "base64rev":
-                    output = base64Reverse(input, true);
-                    break;
-            }
-            resultDiv.textContent = output;
-        }
-
-        document.getElementById("copy-btn").classList.add("visible");
-        currentResultText = resultDiv.textContent;
-    } catch (err) {
-        resultDiv.textContent = "Connection failed... is your server running? 🛸";
-        console.error(err);
-    }
+    document.getElementById("result").textContent = output;
+    document.getElementById("copy-btn").classList.add("visible");
+    currentResultText = output;
 }
 
 function copyResult() {
     navigator.clipboard.writeText(currentResultText).then(() => {
+        // Optional: little feedback animation
         const btn = document.getElementById("copy-btn");
         btn.textContent = "Copied! 📡";
-        setTimeout(() => { btn.textContent = "Copy 📡"; }, 1800);
+        setTimeout(() => { btn.textContent = "Copy 📡"; }, 1500);
     });
 }
 
@@ -360,7 +284,6 @@ function clearAll() {
     document.getElementById("copy-btn").classList.remove("visible");
 }
 
-// ─── Classic cipher functions (unchanged) ───────────────────────────────────
 function caesarCipher(text, shift) {
     return text.replace(/[a-zA-Z]/g, c => {
         const base = c <= "Z" ? 65 : 97;
